@@ -102,7 +102,12 @@ export function Link({
 
   function renderLink(_href: string) {
     return (
-      <StyledA href={_href} className={className} title={title}>
+      <StyledA
+        href={_href}
+        className={className}
+        title={title}
+        rel={isExternal ? 'nofollow noopener' : undefined}
+      >
         {children}
         {isExternal && !noExternalIcon && <ExternalLink />}
       </StyledA>
