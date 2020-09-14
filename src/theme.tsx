@@ -1,7 +1,7 @@
 import { tint, shade } from 'polished'
 
 // base colors
-const brand = '#007ec1'
+const brand = '#007cbf' //was '#007ec1'
 const black = '#000'
 
 // use object notation to allow types to be infered
