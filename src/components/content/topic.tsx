@@ -262,7 +262,7 @@ const LinkSection = styled.div<{ full?: boolean }>`
   }
 `
 
-const LinkSectionHeadline = styled.h4`
+const LinkSectionHeadline = styled.h3`
   color: ${(props) => props.theme.colors.dark1};
   font-size: 1.125rem;
   margin: 0 0 13px;
