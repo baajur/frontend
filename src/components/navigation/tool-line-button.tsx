@@ -5,7 +5,7 @@ import { makeGreenTransparentButton } from '../../helper/css'
 export const UserToolsMobileButton = styled.a<{ isOnTop?: boolean }>`
   ${makeGreenTransparentButton}
   font-weight: bold;
-  font-size: 0.9rem;
+  font-size: 1rem;
   margin: 2px;
   margin-left: 3px;
   color: white;

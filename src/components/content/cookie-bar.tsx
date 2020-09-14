@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { serloDomain } from '../../helper/serlo-domain'
 import { useInstanceData } from '@/contexts/instance-context'
 import { useOrigin } from '@/contexts/origin-context'
+import { makeGreenButton } from '@/helper/css'
 
 interface LocalStorageData {
   revision: string
@@ -103,14 +104,8 @@ const CookieWrapper = styled.div`
 `
 
 const CookieButton = styled.button`
-  background: ${(props) => props.theme.colors.brandGreen};
-  font-size: 1.125rem;
-  color: white;
-  cursor: pointer;
-  border: none;
+  ${makeGreenButton}
   margin-left: 1rem;
-  padding: 0.425rem 0.975rem;
-  outline: none;
 
   &:hover {
     background: ${(props) => props.theme.colors.linkHoverColor};

@@ -25,14 +25,12 @@ It's a bit hacky, but it's free and works quite well.
 export function SearchInput({ onSearchPage }: SearchInputProps) {
   const [searchLoaded, setSearchLoaded] = React.useState(false)
   const [searchActive, setSearchActive] = React.useState(false)
-  // const [isSearchPage, setIsSearchPage] = React.useState(false)
   const { lang, strings } = useInstanceData()
   const router = useRouter()
 
   React.useEffect(() => {
     // note: find a better way to tell search input that it should activate itself
     if (onSearchPage) {
-      // setIsSearchPage(true)
       activateSearch()
     }
     // I only want to run this the first time the page loads
@@ -55,7 +53,7 @@ export function SearchInput({ onSearchPage }: SearchInputProps) {
     if (searchActive) return
 
     if (!searchLoaded) {
-      // const cx = '016022363195733463411:78jhtkzhbhc'
+      // new version, maybe not needed after all. const cx = '016022363195733463411:78jhtkzhbhc'
       const cx = '017461339636837994840:ifahsiurxu4' //"old version" with better autocomplete
       const gcse = document.createElement('script')
       gcse.type = 'text/javascript'
@@ -161,10 +159,11 @@ const sharedTextStyles = css`
   margin-left: 52px;
   line-height: ${heightPx};
   font-size: 1rem;
-  font-weight: bold;
-  color: ${(props) => props.theme.colors.brand};
+  color: #555;
 
   @media (min-width: ${(props) => props.theme.breakpoints.sm}) {
+    font-weight: bold;
+    color: ${(props) => props.theme.colors.brand};
     margin-left: 15px;
   }
 `
