@@ -2,6 +2,7 @@ import { faCaretDown, faUser, faBell } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Tippy, { TippyProps, useSingleton } from '@tippyjs/react'
 import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
 import React from 'react'
 import styled, { css } from 'styled-components'
 
@@ -130,11 +131,14 @@ function Entry({
   onSubMenuInnerClick,
   authMenuMounted,
 }: EntryProps) {
+  const router = useRouter()
   const hasChildren = link.children !== undefined
   const hasIcon =
     link.icon &&
     link.icon !== undefined &&
     menuIconMapping[link.icon] !== undefined
+
+  const isActive = router.asPath === link.url
 
   return (
     <Li show={authMenuMounted === undefined ? true : authMenuMounted}>
@@ -148,13 +152,13 @@ function Entry({
           }
           singleton={target}
         >
-          <StyledLink hasIcon={hasIcon} as="a" tabIndex={0} /*active={true}*/>
+          <StyledLink hasIcon={hasIcon} as="a" tabIndex={0}>
             {renderIcon()}
             {!hasIcon && link.title} <FontAwesomeIcon icon={faCaretDown} />
           </StyledLink>
         </Tippy>
       ) : (
-        <StyledLink hasIcon={hasIcon} /*active={true}*/ href={link.url}>
+        <StyledLink hasIcon={hasIcon} href={link.url} active={isActive}>
           {renderIcon()} {!hasIcon && link.title}
         </StyledLink>
       )}
@@ -170,7 +174,7 @@ function Entry({
     return (
       <span className="fa-layers fa-fw">
         <FontAwesomeIcon
-          // checking for undefined this in hasIcon
+          // checking for undefined done in hasIcon
           icon={menuIconMapping[link.icon!]!}
           style={{ height: '1.4rem', width: '1.4rem', paddingTop: '0' }}
         />
@@ -243,11 +247,13 @@ const StyledLink = styled(Link)<{ active?: boolean; hasIcon?: boolean }>`
   ${makeTransparentButton}
   ${linkStyle}
   font-size: 1rem;
-  color: ${(props) =>
-    props.theme.colors[props.active ? 'darkgray' : 'lightblue']};
+  color: ${(props) => props.theme.colors[props.active ? 'darkgray' : 'brand']};
 
-  background-color: ${(props) =>
-    props.active ? props.theme.colors.lighterblue : 'inherit'};
+  ${(props) =>
+    props.active &&
+    css`
+      pointer-events: none;
+    `}
 
   transition: all 0.3s ease-in-out 0s;
   display: block;
